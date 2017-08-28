@@ -1,5 +1,7 @@
 # Kahlan Mink
 
+[![Build Status](https://travis-ci.org/Brunty/kahlan-mink.svg?branch=master)](https://travis-ci.org/Brunty/kahlan-mink)
+
 🌍 Provides functionality to work with Mink within Kahlan. Also provides a way to boot a PHP web server when tests run.
 
 ## Requirements
