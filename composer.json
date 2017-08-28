@@ -1,0 +1,25 @@
+{
+    "name": "brunty/kahlan-mink",
+    "description": "Allows the use of Mink inside Kahlan",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matt Brunt",
+            "email": "matt@mfyu.co.uk"
+        }
+    ],
+    "require": {
+        "kahlan/kahlan": "^3.1",
+        "behat/mink": "^1.7",
+        "behat/mink-goutte-driver": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Brunty\\Kahlan\\Mink\\": "src/"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    }
+}
