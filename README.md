@@ -4,6 +4,8 @@
 
 🌍 Provides functionality to work with Mink within Kahlan. Also provides a way to boot a PHP web server when tests run.
 
+Inspired and based on this: http://radify.io/blog/end-to-end-functional-testing-with-kahan/ - many thanks to [Simon JAILLET](https://github.com/jails) for not only Kahlan, but the blog post on end to end testing in Kahlan.
+
 ## Requirements
 
 * PHP >= 7.1
