@@ -59,6 +59,19 @@ function element(string $locator = 'body', Element $parent = null): Element
 }
 
 /**
+ * Returns a URL relative to the base URL registered in the Kahlan box
+ *
+ * @param string $url
+ * @param string $boxKey
+ *
+ * @return string
+ */
+function url(string $url, string $boxKey = 'brunty.kahlan-mink.base-url')
+{
+    return rtrim(box($boxKey), '/') . '/' . ltrim($url, '/');
+}
+
+/**
  * Start a PHP Web server and register the PID it's running under in Kahlan's container
  *
  * @param string $host
