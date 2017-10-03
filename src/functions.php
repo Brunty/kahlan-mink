@@ -16,6 +16,7 @@ use function Kahlan\box;
  * Get the Mink session in our current suite
  *
  * @param string $sessionName
+ *
  * @return Session
  */
 function browser(string $sessionName = 'default'): Session
@@ -27,9 +28,10 @@ function browser(string $sessionName = 'default'): Session
  * Get the page we're currently accessing
  *
  * @param string $sessionName
+ *
  * @return DocumentElement
  */
-function page($sessionName = 'default'): DocumentElement
+function page(string $sessionName = 'default'): DocumentElement
 {
     return browser($sessionName)->getPage();
 }
@@ -37,13 +39,14 @@ function page($sessionName = 'default'): DocumentElement
 /**
  * Find an element on the page we're browsing
  *
- * @param string $locator
+ * @param string       $locator
  * @param Element|null $parent
+ *
  * @throws ElementNotFoundException
  *
  * @return Element
  */
-function element($locator = 'body', Element $parent = null): Element
+function element(string $locator = 'body', Element $parent = null): Element
 {
     $parent = $parent ?: page();
     $element = $parent->find('css', $locator);
@@ -59,7 +62,7 @@ function element($locator = 'body', Element $parent = null): Element
  * Start a PHP Web server and register the PID it's running under in Kahlan's container
  *
  * @param string $host
- * @param int $port
+ * @param int    $port
  * @param string $public
  */
 function startServer(string $host = 'localhost', int $port = 8888, string $public = './public'): void
@@ -68,9 +71,13 @@ function startServer(string $host = 'localhost', int $port = 8888, string $publi
     exec("php -S {$host}:{$port} -t {$public} >/dev/null 2>&1 & echo \$!", $output);
 
     try {
-        $socket = Code::spin(function () use ($host, $port) {
-            return @fsockopen($host, $port);
-        }, 10, 100);
+        $socket = Code::spin(
+            function () use ($host, $port) {
+                return @fsockopen($host, $port);
+            },
+            $timeout = 10,
+            $delay = 100
+        );
         fclose($socket);
     } catch (TimeoutException $e) {
         echo $e->getTraceAsString();
