@@ -33,6 +33,16 @@ If you want to start a PHP server when your tests start and stop it when test ex
 \Brunty\Kahlan\Mink\PhpServer::register($this);
 ```
 
+If you want to use the `url()` helper function, register a base URL in your config file under the `brunty.kahlan-mink.base-url` key. All URLs via the `url()` function will be appended to this.
+
+```php
+<?php
+
+\Kahlan\box('brunty.kahlan-mink.base-url', 'http://localhost:8888');
+```
+
+Based on the above, calling `url('my-page')` will return `http://localhost:8888/my-page`
+
 Once that's done, you can use the functions to access things via Mink:
 
 * `\Brunty\Kahlan\Mink\browser(string $sessionName = 'default'): Session` returns the instance of Mink inside our test suite.
