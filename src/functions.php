@@ -59,6 +59,21 @@ function element(string $locator = 'body', Element $parent = null): Element
 }
 
 /**
+ * @param string $url
+ * @param array  $headers
+ */
+function visit(string $url, array $headers = [])
+{
+    $browser = browser();
+
+    foreach ($headers as $header => $value) {
+        $browser->setRequestHeader($header, $value);
+    }
+
+    $browser->visit($url);
+}
+
+/**
  * Returns a URL relative to the base URL registered in the Kahlan box
  *
  * @param string $url
@@ -75,8 +90,8 @@ function url(string $url, string $boxKey = 'brunty.kahlan-mink.base-url'): strin
  * Encodes or decodes content based on content type, if given a string or a DocumentElement, it'll `\json_decode()`
  * it. If given an array or something that's `\JsonSerializable` it'll `\json_encode()` it.
  *
- * @param DocumentElement|string|array  $content
- * @param bool $asArray
+ * @param DocumentElement|string|array $content
+ * @param bool                         $asArray
  *
  * @return mixed|\stdClass|array|string
  */
