@@ -72,13 +72,20 @@ function url(string $url, string $boxKey = 'brunty.kahlan-mink.base-url'): strin
 }
 
 /**
- * @param      $content
+ * Encodes or decodes content based on content type, if given a string or a DocumentElement, it'll `\json_decode()`
+ * it. If given an array or something that's `\JsonSerializable` it'll `\json_encode()` it.
+ *
+ * @param DocumentElement|string|array  $content
  * @param bool $asArray
  *
  * @return mixed|\stdClass|array|string
  */
 function json($content, bool $asArray = true)
 {
+    if ($content instanceof DocumentElement) {
+        return \json_decode($content->getContent(), $asArray);
+    }
+
     if (is_array($content) || $content instanceof \JsonSerializable) {
         return \json_encode($content);
     }
