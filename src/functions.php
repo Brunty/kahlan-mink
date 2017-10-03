@@ -108,6 +108,29 @@ function json($content, bool $asArray = true)
     return \json_decode($content, $asArray);
 }
 
+
+/**
+ * Turns XML strings into a `\SimpleXMLElement` object, or an array
+ * 
+ * @param string|DocumentElement $content
+ * @param bool                   $asArray
+ *
+ * @return array|\SimpleXMLElement
+ */
+function xml($content, bool $asArray = true)
+{
+    if ($content instanceof DocumentElement) {
+        $content = $content->getContent();
+    }
+
+    $xml = new \SimpleXMLElement($content);
+    if ($asArray === true) {
+        $xml = json_decode(json_encode($xml), true);
+    }
+
+    return $xml;
+}
+
 /**
  * Start a PHP Web server and register the PID it's running under in Kahlan's container
  *
