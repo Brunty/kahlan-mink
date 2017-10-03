@@ -66,9 +66,24 @@ function element(string $locator = 'body', Element $parent = null): Element
  *
  * @return string
  */
-function url(string $url, string $boxKey = 'brunty.kahlan-mink.base-url')
+function url(string $url, string $boxKey = 'brunty.kahlan-mink.base-url'): string
 {
     return rtrim(box($boxKey), '/') . '/' . ltrim($url, '/');
+}
+
+/**
+ * @param      $content
+ * @param bool $asArray
+ *
+ * @return mixed|\stdClass|array|string
+ */
+function json($content, bool $asArray = true)
+{
+    if (is_array($content) || $content instanceof \JsonSerializable) {
+        return \json_encode($content);
+    }
+
+    return \json_decode($content, $asArray);
 }
 
 /**
